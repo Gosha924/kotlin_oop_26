@@ -2,11 +2,10 @@ package org.example
 
 interface CustomList : Iterable<Int> {
     operator fun get(index: Int): Int
-    operator fun set(index: Int, value: Int) :Int
+    operator fun set(index: Int, value: Int) : Int
     fun add(element: Int)
-    fun addFirst(element: Int)
-    fun remove(element: Int): Boolean
-    fun indexOf(element: Int): Int
-    fun isEmpty(): Boolean
-    val size: Int
+    fun addFirst(element : Int)
+    fun remove(element: Int) : Boolean
+    fun indexOf(element: Int) : Int
+    val size : Int
 }

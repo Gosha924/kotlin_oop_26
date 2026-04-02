@@ -2,7 +2,10 @@ package org.example
 
 class SingleLinkedList : CustomList {
 
-    private class Node (var value: Int, var next: Node?=null)
+    private class Node (
+        var value: Int,
+        var next: Node? = null,
+        )
 
     private var head: Node? = null
     private var tail: Node? = null
@@ -11,13 +14,10 @@ class SingleLinkedList : CustomList {
     override val size: Int
         get() = sizeList
 
-     override fun isEmpty() :Boolean {
-         return size == 0
-     }
 
     override fun add(element: Int) {
         val newNode = Node(element)
-        if (isEmpty()) {
+        if (size == 0) {
             head = newNode
             tail = newNode
         } else {
@@ -25,7 +25,6 @@ class SingleLinkedList : CustomList {
             tail = newNode
         }
         sizeList++
-
     }
 
     override operator fun set(index: Int, value: Int) : Int {
@@ -54,7 +53,7 @@ class SingleLinkedList : CustomList {
         sizeList++
     }
 
-    override operator fun get(index: Int): Int {
+    override operator fun get(index: Int) : Int {
         if (index < 0 || index >= size) {
             throw IndexOutOfBoundsException("Index $index out of bounds for size $size")
         }
@@ -83,8 +82,8 @@ class SingleLinkedList : CustomList {
         return -1
     }
 
-    override fun remove(element: Int): Boolean {
-        if (isEmpty()) {
+    override fun remove(element: Int) : Boolean {
+        if (size == 0) {
             return false
         }
         var current = head
@@ -93,8 +92,14 @@ class SingleLinkedList : CustomList {
             if (current.value == element) {
                 if (prev == null) {
                     head = current.next
+                    if (head == null) {
+                        tail = null
+                    }
                 } else {
                     prev.next = current.next
+                    if (prev.next == null) {
+                        tail = prev
+                    }
                 }
                 sizeList--
                 return true
@@ -105,7 +110,7 @@ class SingleLinkedList : CustomList {
         return false
     }
 
-    override fun iterator(): Iterator<Int> {
+    override fun iterator() : Iterator<Int> {
         return object : Iterator<Int> {
             private var current = head
             override fun hasNext(): Boolean {
