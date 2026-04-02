@@ -101,4 +101,33 @@ class SingleLinkedListTest {
         list[2] = 5
         assertEquals(5, list[2])
     }
+
+    @Test
+    fun `set throws IndexOutOfBoundsException for invalid index`() {
+        list.add(1)
+        assertThrows(IndexOutOfBoundsException::class.java) {
+            list.set(5, 10)
+        }
+    }
+
+    @Test
+    fun `remove duplicate elements removes only first occurrence`() {
+        list.add(1)
+        list.add(2)
+        list.add(1)
+        list.remove(1)
+        assertEquals(2, list.size)
+        assertEquals(2, list[0])
+        assertEquals(1, list[1])
+    }
+
+    @Test
+    fun `indexOf returns -1 if element not found`() {
+        list.add(1)
+        list.add(2)
+        assertEquals(-1, list.indexOf(123456789))
+    }
+
+
+
 }
