@@ -1,45 +1,125 @@
 package org.example.list
 
-class SingleLinkedList : CustomList {
-    // don't use any java/kotlin internal datastructures like lists))
-    // write from scratch))
+ open class SingleLinkedList : CustomList {
+    private class Node (
+        var value: Int,
+        var next: Node? = null,
+    )
+
+    private var head: Node? = null
+    private var tail: Node? = null
+    private var sizeList: Int = 0
 
 
     override val size: Int
-        get() = TODO("Implement this")
+        get() = sizeList
 
     override fun add(element: Int) {
-        TODO("Implement this")
+        val newNode = Node(element)
+        if (size == 0) {
+            head = newNode
+            tail = newNode
+        } else {
+            tail?.next = newNode
+            tail = newNode
+        }
+        sizeList++
     }
 
-    override operator fun set(index: Int, value: Int) {
-        TODO("Implement this")
+    override operator fun set(index: Int, value: Int) : Int {
+        if (index < 0 || index >= size) {
+            throw IndexOutOfBoundsException("Index $index out of bounds for size $size")
+        }
+        var current = head
+        var currentIndex: Int = 0
+        while (current != null) {
+            if (currentIndex == index) {
+                val oldValue = current.value
+                current.value = value
+                return oldValue
+            }
+            currentIndex++
+            current = current.next
+        }
+        throw IllegalStateException("Element not found")
     }
 
     override fun addFirst(element: Int) {
-        TODO("Implement this")
+        head = Node(element, next = head)
+        if (tail == null) {
+            tail = head
+        }
+        sizeList++
     }
 
-    override operator fun get(index: Int): Int {
-        TODO("Implement this")
+    override operator fun get(index: Int) : Int {
+        if (index < 0 || index >= size) {
+            throw IndexOutOfBoundsException("Index $index out of bounds for size $size")
+        }
+        var current = head
+        var currentIndex: Int = 0
+        while (current != null) {
+            if (index == currentIndex) {
+                return current.value
+            }
+            currentIndex++
+            current = current.next
+        }
+        throw IllegalStateException("Element not found")
     }
 
     override fun indexOf(element: Int): Int {
-        TODO("Implement this")
-    }
-
-    override fun remove(element: Int): Boolean {
-        TODO("Implement this")
-    }
-
-    override fun iterator(): Iterator<Int> {
-        return object : Iterator<Int> {
-            override fun hasNext(): Boolean {
-                TODO("Implement this")
+        var index = 0
+        var current = head
+        while (current != null) {
+            if (current.value == element) {
+                return index
             }
+            index++
+            current = current.next
+        }
+        return -1
+    }
 
+
+    override fun remove(element: Int) : Boolean {
+        if (size == 0) {
+            return false
+        }
+        var current = head
+        var prev: Node? = null
+        while (current != null) {
+            if (current.value == element) {
+                if (prev == null) {
+                    head = current.next
+                    if (head == null) {
+                        tail = null
+                    }
+                } else {
+                    prev.next = current.next
+                    if (prev.next == null) {
+                        tail = prev
+                    }
+                }
+                sizeList--
+                return true
+            }
+            prev = current
+            current = current.next
+        }
+        return false
+    }
+
+    override fun iterator() : Iterator<Int> {
+        return object : Iterator<Int> {
+            private var current = head
+            override fun hasNext(): Boolean {
+                return current != null
+            }
             override fun next(): Int {
-                TODO("Implement this")
+                val value = current?.value ?: throw NoSuchElementException()
+                current = current?.next
+                return value
             }
         }
     }
