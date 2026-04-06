@@ -1,6 +1,6 @@
 package org.example.list
 
-class CustomArrayList(size: Int) : CustomList {
+class CustomArrayList(size: Int): CustomList {
     var capasity : Int = size * 2 + 1
     var inner = IntArray(capasity)
     var currentSize : Int = 0
@@ -32,7 +32,7 @@ class CustomArrayList(size: Int) : CustomList {
         currentSize++
     }
 
-    override fun remove(element: Int) : Boolean {
+    override fun remove(element: Int): Boolean {
         val indexElem : Int = this.indexOf(element)
         if (indexElem < 0) {
             return false
@@ -55,14 +55,14 @@ class CustomArrayList(size: Int) : CustomList {
          return -1
      }
 
-    override operator fun get(index: Int) : Int {
+    override operator fun get(index: Int): Int {
         if (index < 0 || index >= currentSize) {
             throw  IndexOutOfBoundsException("Index $index out of bounds for size $size")
         }
         return inner[index]
     }
 
-    override operator fun set(index: Int, value: Int) : Int {
+    override operator fun set(index: Int, value: Int): Int {
         if (index < 0 || index >= currentSize) {
             throw IndexOutOfBoundsException("Index $index out of bounds for size $size")
         }

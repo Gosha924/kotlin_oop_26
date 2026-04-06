@@ -3,7 +3,7 @@ package org.example.stack
 import org.example.list.CustomArrayList
 import org.example.list.SingleLinkedList
 
-class ArrayListStack(private val initialCapacity: Int = 10) : Stack {
+class ArrayListStack(private val initialCapacity: Int = 10): Stack {
     private var storage = CustomArrayList(initialCapacity)
 
     override val isEmpty: Boolean
@@ -13,7 +13,7 @@ class ArrayListStack(private val initialCapacity: Int = 10) : Stack {
         storage.addFirst(value)
     }
 
-    override fun pop() : Int {
+    override fun pop(): Int {
         if (this.isEmpty) {
             throw NoSuchElementException("Stack is empty")
         }
@@ -22,7 +22,7 @@ class ArrayListStack(private val initialCapacity: Int = 10) : Stack {
         return elem
     }
 
-    override fun peek() : Int {
+    override fun peek(): Int {
         if (this.isEmpty) {
             throw NoSuchElementException("Stack is empty")
         }

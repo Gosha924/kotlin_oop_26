@@ -26,7 +26,7 @@ package org.example.list
         sizeList++
     }
 
-    override operator fun set(index: Int, value: Int) : Int {
+    override operator fun set(index: Int, value: Int): Int {
         if (index < 0 || index >= size) {
             throw IndexOutOfBoundsException("Index $index out of bounds for size $size")
         }
@@ -52,7 +52,7 @@ package org.example.list
         sizeList++
     }
 
-    override operator fun get(index: Int) : Int {
+    override operator fun get(index: Int): Int {
         if (index < 0 || index >= size) {
             throw IndexOutOfBoundsException("Index $index out of bounds for size $size")
         }
@@ -82,7 +82,7 @@ package org.example.list
     }
 
 
-    override fun remove(element: Int) : Boolean {
+    override fun remove(element: Int): Boolean {
         if (size == 0) {
             return false
         }
@@ -110,7 +110,7 @@ package org.example.list
         return false
     }
 
-    override fun iterator() : Iterator<Int> {
+    override fun iterator(): Iterator<Int> {
         return object : Iterator<Int> {
             private var current = head
             override fun hasNext(): Boolean {
